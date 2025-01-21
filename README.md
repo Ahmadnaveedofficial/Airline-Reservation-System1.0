@@ -1,7 +1,3 @@
-# airline-final-first-semester-project
-
-
-
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -80,10 +76,10 @@ void bookAndAddDetails(int& customerId, string& name, int& age, string& gender, 
     cout<<"\t\t\t\t\t\tFlight No\tDestination\tDeparture\tDuration\tPrice\n";
 
     for (int i = 0; i < flightCount; ++i) {
-        cout<<"\t\t\t\t\t\t"<<flights[i][0] << "\t" <<flights[i][1] << "\t\t" <<flights[i][2] << "\t"  <<flights[i][3] << " hours\t"  <<"Rs." << flights[i][4] << endl;
+        cout<<"\t\t\t\t\t\t"<<flights[i][0]<<"\t"<<flights[i][1]<<"\t\t"<<flights[i][2]<< "\t"<<flights[i][3]<<" hours\t"  <<"Rs." <<flights[i][4]<<endl;
     }
 
-    cout<<"\n\t\t\t\t\t\t\tSelect a flight by entering the flight number: ";
+    cout<<"\n\n\t\t\t\t\t\t\tSelect a flight by entering the flight number: ";
     cin>>selectedFlightNumber;
 
     bool flightFound = false;
@@ -110,7 +106,7 @@ void bookAndAddDetails(int& customerId, string& name, int& age, string& gender, 
         displayTicket(customerId, name, gender, selectedFlightNumber, selectedDestination, selectedDepartureTime, selectedDuration, selectedPrice);
     } else 
 	{
-       cout<<"\n\t\t\t\t\t\t\tInvalid flight number! Please try again.\n";
+       cout<<"\n\n\t\t\t\t\t\t\tInvalid flight number! Please try again.\n";
     }
     system("pause");
 }
@@ -176,13 +172,13 @@ void mainMenu()
                
             case 2:
 			{
-            	
+            	system("cls");
 				if(flightBooked) 
 				{
                     printTicket(customerId, name, gender, selectedFlightNumber, selectedDestination, selectedDepartureTime, selectedDuration, selectedPrice);
                 } else 
 				{
-                    cout<<"\nNo ticket has been booked yet.\n";
+                    cout<<"\n\n\n\n\n\n\n\t\t\t\t\t\t\tNo ticket has been booked yet.\n";
                 }
                 system("pause");
                 break;
@@ -195,14 +191,16 @@ void mainMenu()
 				}
             case 4:
             	{
-            	 cout<<"\t\t\t\t\t\t\tThank you for using Hazel Blue Airline!\n";
+            		system("cls");
+            	 cout<<"\n\n\n\n\n\n\n\n\n\n\t\t\t\t\t\t\tThank you for using Hazel Blue Airline!\n";
                 break;
 				}
 				
                 
             default:
                  {
-        	    cout<<"\n\t\t\t\t\t\t\tInvalid choice! Please try again.\n";
+                 	system("cls");
+        	    cout<<"\n\n\n\n\n\n\n\n\n\n\t\t\t\t\t\t\tInvalid choice! Please try again.\n";
 	          	}
                 system("pause");
         }
