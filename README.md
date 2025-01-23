@@ -1,8 +1,6 @@
-#include <iostream>
-#include <fstream>
-#include <string>
-#include <conio.h>
-
+#include<iostream>
+#include<fstream>
+#include<string>
 using namespace std;
 
 void inputCustomerDetails(int& customerId, string& name, int& age, string& gender, string& address, string& phone)
@@ -30,20 +28,22 @@ void inputCustomerDetails(int& customerId, string& name, int& age, string& gende
     system("pause");
 }
 
-void printTicket(int customerId, const string& name, const string& gender, const string& flightNumber, const string& destination, const string& departureTime, const string& duration, float price) {
+void printTicket(int& customerId, const string& name, const string& gender, const string& flightNumber, 
+const string& destination, const string& departureTime, const string& duration, float price) 
+{
 
   system("cls");
-    ofstream outf("ticket.txt");
+    ofstream outf("ticket.txt",ios::app);
     if (outf.is_open())
 	 {
         outf<<"<------------ Airline Ticket ------------>\n";
-        outf<<"Customer ID:    \t"<<customerId << endl;
+        outf<<"Customer ID:    \t"<<customerId<<endl;
         outf<<"Customer Name:  \t"<<name<<endl;
         outf<<"Customer Gender:\t"<<gender<<endl;
         outf<<"Flight Number:  \t"<<flightNumber<<endl;
         outf<<"Destination:    \t"<<destination<<endl;
         outf<<"Departure Time: \t"<<departureTime<<endl;
-        outf<<"Duration:       \t"<<duration << " hours" <<endl;
+        outf<<"Duration:       \t"<<duration<<" hours" <<endl;
         outf<<"Price:          \t Rs."<<price<<endl;
     }
     outf.close();
@@ -52,7 +52,8 @@ void printTicket(int customerId, const string& name, const string& gender, const
 
 }
 
-void displayTicket(int customerId, const string& name, const string& gender, const string& flightNumber, const string& destination, const string& departureTime, const string& duration, float price)
+void displayTicket(int customerId, const string& name, const string& gender, const string& flightNumber, 
+const string& destination, const string& departureTime, const string& duration, float price)
  {
 
     system("cls");
@@ -69,14 +70,17 @@ void displayTicket(int customerId, const string& name, const string& gender, con
 }
 
 
-void bookAndAddDetails(int& customerId, string& name, int& age, string& gender, string& address, string& phone, string flights[][5], int flightCount, bool& flightBooked, string& selectedFlightNumber, string& selectedDestination, string& selectedDepartureTime, string& selectedDuration, float& selectedPrice) {
+void bookAndAddDetails(int& customerId, string& name, int& age, string& gender, string& address, string& phone,
+ string flights[][5], int flightCount, bool& flightBooked, string& selectedFlightNumber, 
+ string& selectedDestination, string& selectedDepartureTime, string& selectedDuration, float& selectedPrice) 
+{
     system("cls");
+    cout<<"\n\n\n\n\n\t\t\t\t\t\t\t\t\tAvailable Flights\n\n";
+    cout<<"\t\t\t\t\t\tFlight No\tDestination\t  Departure\t\tDuration\tPrice\n";
 
-    cout<<"\nAvailable Flights:\n\n\n\n";
-    cout<<"\t\t\t\t\t\tFlight No\tDestination\tDeparture\tDuration\tPrice\n";
-
-    for (int i = 0; i < flightCount; ++i) {
-        cout<<"\t\t\t\t\t\t"<<flights[i][0]<<"\t"<<flights[i][1]<<"\t\t"<<flights[i][2]<< "\t"<<flights[i][3]<<" hours\t"  <<"Rs." <<flights[i][4]<<endl;
+    for (int i=0;i<flightCount;++i)
+	 {
+        cout<<"\t\t\t\t\t\t"<<flights[i][0]<<"  \t"<<flights[i][1]<<"\t\t"<<flights[i][2]<< "\t"<<flights[i][3]<<" hours\t"  <<"Rs." <<flights[i][4]<<endl;
     }
 
     cout<<"\n\n\t\t\t\t\t\t\tSelect a flight by entering the flight number: ";
@@ -99,22 +103,21 @@ void bookAndAddDetails(int& customerId, string& name, int& age, string& gender, 
 
     if (flightFound)
 	 {
-
-  cout<<"\n\t\t\t\t\t\t\tEnter Customer Details:\n\n";
         inputCustomerDetails(customerId, name, age, gender, address, phone);
         cout<<"\n\t\t\t\t\t\t\tFlight booked successfully!\n";
         displayTicket(customerId, name, gender, selectedFlightNumber, selectedDestination, selectedDepartureTime, selectedDuration, selectedPrice);
-    } else 
+    } 
+	else 
 	{
        cout<<"\n\n\t\t\t\t\t\t\tInvalid flight number! Please try again.\n";
     }
     system("pause");
-}
+  }
 
 void aboutUs()
  {
     system("cls");
-    cout << "\n\n\n\n\n\n\n"
+    cout<<"\n\n\n\n\n\n\n"
      <<"\t\t\t\t\t<-------------------------------- About Us ------------------------------->\n"
      <<"\n\t\t\t\t\tWelcome to Hazel Blue Airline where we believe that every journey is more\n"
      <<"\t\t\t\t\tthan just reaching a destination. Your safety, connection, and comfort\n"
@@ -125,12 +128,12 @@ void aboutUs()
      <<"\t\t\t\t\tTogether, we navigate the skies with ease and comfort, creating unforgettable\n"
      <<"\t\t\t\t\tjourneys with you.\n"
      <<"\n\t\t\t\t\t<------------------------------------------------------------------------>\n";
-     
        system("pause");
     }
 
-void mainMenu() 
+int main() 
 {
+    system("color F0");
     int choice;
     int customerId, age;
     string name, gender, address, phone;
@@ -151,14 +154,14 @@ void mainMenu()
     do
 	 {
         system("cls");
-        cout<<"\n\n\n\n\n\n\n                 " << endl;
-        cout<<"\t\t\t\t\t\t\t<---------- WELCOME TO OUR HAZEL BLUE AIRLINE ---------->\n" << endl;
-        cout<<"\t\t\t\t\t\t\t\t        [1] Book a Flight                      " << endl;
-        cout<<"\t\t\t\t\t\t\t\t        [2] Print Ticket                       " << endl;
-        cout<<"\t\t\t\t\t\t\t\t        [3] What We Are?                       " << endl;
-        cout<<"\t\t\t\t\t\t\t\t        [4] Exit                               " << endl;
-        cout<<"\n";
-        cout<<"Enter your choice: ";
+        cout<<"\n\n\n\n\n\n\n "<<endl;
+        cout<<"\t\t\t\t\t\t\t<---------- WELCOME TO OUR HAZEL BLUE AIRLINE ---------->\n"<<endl;
+        cout<<"\t\t\t\t\t\t\t\t        [1] Book a Flight                      "<<endl;
+        cout<<"\t\t\t\t\t\t\t\t        [2] Print Ticket                       "<<endl;
+        cout<<"\t\t\t\t\t\t\t\t        [3] What We Are?                       "<<endl;
+        cout<<"\t\t\t\t\t\t\t\t        [4] Exit                               "<<endl;
+        cout<<"\n\n\n";
+        cout<<"\t\t\t\tEnter your choice: ";
         cin>>choice;
         cout<<"\n";
 
@@ -166,7 +169,8 @@ void mainMenu()
 		{
             case 1:
 			{
-				 bookAndAddDetails(customerId, name, age, gender, address, phone, flights, flightCount, flightBooked, selectedFlightNumber, selectedDestination, selectedDepartureTime, selectedDuration, selectedPrice);
+				 bookAndAddDetails(customerId, name, age, gender, address, phone, flights, flightCount, 
+				 flightBooked, selectedFlightNumber, selectedDestination, selectedDepartureTime, selectedDuration, selectedPrice);
                 break;
 			}
                
@@ -176,7 +180,8 @@ void mainMenu()
 				if(flightBooked) 
 				{
                     printTicket(customerId, name, gender, selectedFlightNumber, selectedDestination, selectedDepartureTime, selectedDuration, selectedPrice);
-                } else 
+                } 
+				else 
 				{
                     cout<<"\n\n\n\n\n\n\n\t\t\t\t\t\t\tNo ticket has been booked yet.\n";
                 }
@@ -206,11 +211,5 @@ void mainMenu()
         }
     } 
 	while (choice != 4);
-}
-
-int main() 
-{
-    system("color F0");
-    mainMenu();
     return 0;
 }
