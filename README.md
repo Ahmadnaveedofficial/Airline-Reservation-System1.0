@@ -1,9 +1,12 @@
 #include<iostream>
 #include<fstream>
 #include<string>
+#include <cstdlib> // For rand() and srand()
+#include <ctime>   // For time()
+
 using namespace std;
 
-void inputCustomerDetails(int& customerId, string& name, int& age, string& gender, string& address, string& phone)
+void inputCustomerDetails(int& customerId,string& name,int& age,string& gender,string& address,string& phone)
  {
    system("cls");
     cout<<"\n\n\n\n\n\n\n";
@@ -28,8 +31,8 @@ void inputCustomerDetails(int& customerId, string& name, int& age, string& gende
     system("pause");
 }
 
-void printTicket(int& customerId, const string& name, const string& gender, const string& flightNumber, 
-const string& destination, const string& departureTime, const string& duration, float price) 
+void printTicket(int& customerId,const string& name,const string& gender,const string& flightNumber, 
+const string& destination,const string& departureTime,const string& duration,float price,string& seatNumber) 
 {
 
   system("cls");
@@ -41,10 +44,12 @@ const string& destination, const string& departureTime, const string& duration, 
         outf<<"Customer Name:  \t"<<name<<endl;
         outf<<"Customer Gender:\t"<<gender<<endl;
         outf<<"Flight Number:  \t"<<flightNumber<<endl;
+        outf<<"Seat No:        \t"<<seatNumber<<endl;
         outf<<"Destination:    \t"<<destination<<endl;
         outf<<"Departure Time: \t"<<departureTime<<endl;
         outf<<"Duration:       \t"<<duration<<" hours" <<endl;
         outf<<"Price:          \t Rs."<<price<<endl;
+        
     }
     outf.close();
     cout<<"\n\n\n\n\n\n\n";
@@ -52,8 +57,8 @@ const string& destination, const string& departureTime, const string& duration, 
 
 }
 
-void displayTicket(int customerId, const string& name, const string& gender, const string& flightNumber, 
-const string& destination, const string& departureTime, const string& duration, float price)
+void displayTicket(int customerId,const string& name,const string& gender,const string& flightNumber, 
+const string& destination,const string& departureTime,const string& duration,float price,string& seatNumber)
  {
 
     system("cls");
@@ -63,16 +68,18 @@ const string& destination, const string& departureTime, const string& duration, 
     cout<<"\t\t\t\t\t\t\t Customer Name:     "<<name<<endl;
     cout<<"\t\t\t\t\t\t\t Customer Gender:    "<<gender<<endl;
     cout<<"\t\t\t\t\t\t\t Flight Number:      "<<flightNumber<<endl;
+    cout<<"\t\t\t\t\t\t\t Seat No:             "<<seatNumber<<endl;
     cout<<"\t\t\t\t\t\t\t Destination:        "<<destination<<endl;
     cout<<"\t\t\t\t\t\t\t Departure Time:     "<<departureTime<<endl;
     cout<<"\t\t\t\t\t\t\t Duration:           "<<duration<<" hours"<<endl;
     cout<<"\t\t\t\t\t\t\t Price:             Rs."<<price<<endl;
+  
 }
 
 
-void bookAndAddDetails(int& customerId, string& name, int& age, string& gender, string& address, string& phone,
- string flights[][5], int flightCount, bool& flightBooked, string& selectedFlightNumber, 
- string& selectedDestination, string& selectedDepartureTime, string& selectedDuration, float& selectedPrice) 
+void bookAndAddDetails(int& customerId,string& name,int& age,string& gender,string& address,string& phone,
+ string flights[][5],int flightCount,bool& flightBooked,string& selectedFlightNumber, 
+ string& selectedDestination,string& selectedDepartureTime,string& selectedDuration,float& selectedPrice,string& seatNumber) 
 {
     system("cls");
     cout<<"\n\n\n\n\n\t\t\t\t\t\t\t\t\tAvailable Flights\n\n";
@@ -80,7 +87,7 @@ void bookAndAddDetails(int& customerId, string& name, int& age, string& gender, 
 
     for (int i=0;i<flightCount;++i)
 	 {
-        cout<<"\t\t\t\t\t\t"<<flights[i][0]<<"  \t"<<flights[i][1]<<"\t\t"<<flights[i][2]<< "\t"<<flights[i][3]<<" hours\t"  <<"Rs." <<flights[i][4]<<endl;
+        cout<<"\t\t\t\t\t\t"<<flights[i][0]<<"  \t"<<flights[i][1]<<"\t\t"<<flights[i][2]<< "\t"<<flights[i][3]<<" hours\t"<<"Rs."<<flights[i][4]<<endl;
     }
 
     cout<<"\n\n\t\t\t\t\t\t\tSelect a flight by entering the flight number: ";
@@ -97,15 +104,20 @@ void bookAndAddDetails(int& customerId, string& name, int& age, string& gender, 
             selectedPrice=stof(flights[i][4]);
             flightFound=true;
             flightBooked=true;
+                 // Generate a random seat number (Row: 1–30, Column: A–F)
+            srand(time(0)); // Seed for randomness
+            int row = rand() % 30 + 1; // Random row between 1 and 30
+            char column = 'A' + (rand() % 6); // Random column between 'A' and 'F'
+            seatNumber = to_string(row) + column; // Combine row and column
             break;
         }
     }
 
     if (flightFound)
 	 {
-        inputCustomerDetails(customerId, name, age, gender, address, phone);
+        inputCustomerDetails(customerId,name,age,gender,address,phone);
         cout<<"\n\t\t\t\t\t\t\tFlight booked successfully!\n";
-        displayTicket(customerId, name, gender, selectedFlightNumber, selectedDestination, selectedDepartureTime, selectedDuration, selectedPrice);
+        displayTicket(customerId,name,gender,selectedFlightNumber,selectedDestination,selectedDepartureTime,selectedDuration,selectedPrice,seatNumber);
     } 
 	else 
 	{
@@ -135,8 +147,8 @@ int main()
 {
     system("color F0");
     int choice;
-    int customerId, age;
-    string name, gender, address, phone;
+    int customerId,age;
+    string name,gender,address,phone;
     string flights[6][5] = {
         {"Pk-498", "Dubai", "08-12-2024 7:40PM", "04", "14000"},
         {"Pk-198", "Canada", "22-01-2024 5:40AM", "16", "34000"},
@@ -147,7 +159,7 @@ int main()
     };
     
     int flightCount = 6;
-    string selectedFlightNumber, selectedDestination, selectedDepartureTime, selectedDuration;
+    string selectedFlightNumber,selectedDestination,selectedDepartureTime,selectedDuration,seatNumber;
     float selectedPrice;
     bool flightBooked = false;
     
@@ -169,17 +181,17 @@ int main()
 		{
             case 1:
 			{
-				 bookAndAddDetails(customerId, name, age, gender, address, phone, flights, flightCount, 
-				 flightBooked, selectedFlightNumber, selectedDestination, selectedDepartureTime, selectedDuration, selectedPrice);
+				 bookAndAddDetails(customerId,name,age,gender,address,phone,flights,flightCount, 
+				 flightBooked,selectedFlightNumber,selectedDestination,selectedDepartureTime,selectedDuration,selectedPrice,seatNumber);
                 break;
 			}
-               
+			
             case 2:
 			{
             	system("cls");
 				if(flightBooked) 
 				{
-                    printTicket(customerId, name, gender, selectedFlightNumber, selectedDestination, selectedDepartureTime, selectedDuration, selectedPrice);
+                    printTicket(customerId,name,gender,selectedFlightNumber,selectedDestination,selectedDepartureTime,selectedDuration,selectedPrice,seatNumber);
                 } 
 				else 
 				{
