@@ -57,8 +57,8 @@ const string& destination,const string& departureTime,const string& duration,flo
 
 }
 
-void displayTicket(int customerId,const string& name,const string& gender,const string& flightNumber, 
-const string& destination,const string& departureTime,const string& duration,float price,string& seatNumber)
+void displayTicket(int&customerId,const string&name,const string&gender,const string&flightNumber, 
+const string&destination,const string&departureTime,const string&duration,float&price,string&seatNumber)
  {
 
     system("cls");
@@ -77,15 +77,15 @@ const string& destination,const string& departureTime,const string& duration,flo
 }
 
 
-void bookAndAddDetails(int& customerId,string& name,int& age,string& gender,string& address,string& phone,
- string flights[][5],int flightCount,bool& flightBooked,string& selectedFlightNumber, 
+void bookAndAddDetails(int&customerId,string&name,int&age,string&gender,string&address,string&phone,
+ string flights[][5],int&flightCount,bool&flightBooked,string&selectedFlightNumber, 
  string& selectedDestination,string& selectedDepartureTime,string& selectedDuration,float& selectedPrice,string& seatNumber) 
 {
     system("cls");
     cout<<"\n\n\n\n\n\t\t\t\t\t\t\t\t\tAvailable Flights\n\n";
     cout<<"\t\t\t\t\t\tFlight No\tDestination\t  Departure\t\tDuration\tPrice\n";
 
-    for (int i=0;i<flightCount;++i)
+    for (int i=0;i< flightCount;++i)
 	 {
         cout<<"\t\t\t\t\t\t"<<flights[i][0]<<"  \t"<<flights[i][1]<<"\t\t"<<flights[i][2]<< "\t"<<flights[i][3]<<" hours\t"<<"Rs."<<flights[i][4]<<endl;
     }
@@ -136,7 +136,7 @@ void aboutUs()
      <<"\t\t\t\t\tare our priorities. We believe that aviation is proof that with\n"
      <<"\t\t\t\t\tdetermination, we have the capacity to achieve the impossible.\n"
      <<"\n\t\t\t\t\tThis airline was founded by four members whose names are given below:\n"
-     <<"\t\t\t\t\tAhmad, Saqib, Ali, and Rehman, with a passion for aviation and excellence.\n"
+     <<"\t\t\t\t\tAhmad, Saqib, Unbreen, and Ukasha, with a passion for aviation and excellence.\n"
      <<"\t\t\t\t\tTogether, we navigate the skies with ease and comfort, creating unforgettable\n"
      <<"\t\t\t\t\tjourneys with you.\n"
      <<"\n\t\t\t\t\t<------------------------------------------------------------------------>\n";
